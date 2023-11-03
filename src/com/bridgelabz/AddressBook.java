@@ -1,25 +1,48 @@
 package com.bridgelabz;
 
+import java.util.Scanner;
+
 public class AddressBook {
+    Scanner sc = new Scanner(System.in);
+    Contact person = new Contact();
+    public void addContact(){
+        System.out.println("Enter first name :");
+        String firstName = sc.next();
+        person.setFirstName(firstName);
+
+        System.out.println("Enter last name :");
+        String lastName = sc.next();
+        person.setLastName(lastName);
+
+        System.out.println("Enter address :");
+        String address = sc.next();
+        person.setAddress(address);
+
+        System.out.println("Enter city :");
+        String city = sc.next();
+        person.setCity(city);
+
+        System.out.println("Enter state :");
+        String state = sc.next();
+        person.setState(state);
+
+        System.out.println("Enter zip :");
+        int zip = sc.nextInt();
+        person.setZip(zip);
+
+        System.out.println("Enter phone number :");
+        int phoneNumber = sc.nextInt();
+        person.setPhone(phoneNumber);
+
+        System.out.println("Enter email address :");
+        String email = sc.next();
+        person.setEmail(email);
+
+        System.out.println(person);
+    }
     public static void main(String[] args){
         System.out.println("Welcome to address book management system.");
-        Contact cont = new Contact();
-        cont.setFirstName("John");
-        cont.setLastName("Cena");
-        cont.setAddress("Home");
-        cont.setCity("Pune");
-        cont.setState("MH");
-        cont.setZip(123456);
-        cont.setPhone(123456790);
-        cont.setEmail("abc1@gmail.com");
-
-        System.out.println(cont.getFirstName());
-        System.out.println(cont.getLastName());
-        System.out.println(cont.getAddress());
-        System.out.println(cont.getCity());
-        System.out.println(cont.getState());
-        System.out.println(cont.getZip());
-        System.out.println(cont.getPhone());
-        System.out.println(cont.getEmail());
+        AddressBook addressBook = new AddressBook();
+        addressBook.addContact();
     }
 }
