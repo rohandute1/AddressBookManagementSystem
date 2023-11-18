@@ -2,6 +2,7 @@ package com.bridgelabz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class AddressBook {
@@ -34,7 +35,7 @@ public class AddressBook {
         person.setZip(zip);
 
         System.out.println("Enter phone number :");
-        int phoneNumber = sc.nextInt();
+        long phoneNumber = sc.nextLong();
         person.setPhone(phoneNumber);
 
         System.out.println("Enter email address :");
@@ -42,7 +43,6 @@ public class AddressBook {
         person.setEmail(email);
 
         contactList.add(person);
-
         System.out.println(contactList);
     }
     public void editContact(){
@@ -51,37 +51,53 @@ public class AddressBook {
         for (int i = 0;i<contactList.size();i++) {
             if (name.equals(person.getFirstName())) {
                 System.out.println("Select option from below:");
-                System.out.println("1.Change first name.\n2.Change last name\n3.Change address\n4.Change city\n5.Change state" +
-                        "\n6.Change zip code\n7.Change Phone number\n8.Change email");
+                System.out.println("""
+                        1.Change first name.
+                        2.Change last name
+                        3.Change address
+                        4.Change city
+                        5.Change state
+                        6.Change zip code
+                        7.Change Phone number
+                        8.Change email""");
                 int condition = sc.nextInt();
                 switch (condition) {
-                    case 1:
+                    case 1 -> {
+                        System.out.println("Please enter the new first name");
                         contactList.get(i).setFirstName(sc.next());
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
+                        System.out.println("Please enter the new last name");
                         contactList.get(i).setLastName(sc.next());
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
+                        System.out.println("Please enter the new address");
                         contactList.get(i).setAddress(sc.next());
-                        break;
-                    case 4:
+                    }
+                    case 4 -> {
+                        System.out.println("Please enter the new city name");
                         contactList.get(i).setCity(sc.next());
-                        break;
-                    case 5:
+                    }
+                    case 5 -> {
+                        System.out.println("Please enter the new state name");
                         contactList.get(i).setState(sc.next());
-                        break;
-                    case 6:
+                    }
+                    case 6 -> {
+                        System.out.println("Please enter the new zip code");
                         contactList.get(i).setZip(sc.nextInt());
-                        break;
-                    case 7:
+                    }
+                    case 7 -> {
+                        System.out.println("Please enter the new phone number");
                         contactList.get(i).setPhone(sc.nextInt());
-                        break;
-                    case 8:
+                    }
+                    case 8 -> {
+                        System.out.println("Please enter the new email address");
                         contactList.get(i).setEmail(sc.next());
-                        break;
+                    }
                 }
             }
         }
+        System.out.println("!New edited contact!");
         System.out.println(contactList);
     }
     public void deleteContact(){
@@ -94,11 +110,40 @@ public class AddressBook {
         }
         System.out.println(contactList);
     }
+    public void addMultipleContact(){
+        System.out.println("enter how many new contacts do you want to add to the address book :");
+        int input = sc.nextInt();
+
+        for (int i = 0; i < input; i++) {
+            addContact();
+            System.out.println(i+1+"Contact created successfully");
+        }
+        System.out.println(contactList);
+    }
     public static void main(String[] args){
         System.out.println("Welcome to address book management system.");
+        Scanner sc = new Scanner(System.in);
         AddressBook addressBook = new AddressBook();
+        System.out.println("Please enter the details of first contact.");
         addressBook.addContact();
-        addressBook.editContact();
-        addressBook.deleteContact();
+        boolean continueExecution = true;
+        while (continueExecution)
+        {
+            System.out.println("Please select the option:- ");
+            System.out.println("1.Edit above contact\n2.Delete the contact\n3.Add multiple contacts");
+            int option = sc.nextInt();
+            switch(option){
+                case 1 -> addressBook.editContact();
+                case 2 -> addressBook.deleteContact();
+                case 3 -> addressBook.addMultipleContact();
+                default -> System.out.println("Please enter correct option.");
+            }
+            System.out.println("Do you want to continue.(yes/no)");
+            String userInput = sc.next();
+            if (!Objects.equals(userInput, "yes"))
+            {
+                continueExecution = false;
+            }
+        }
     }
 }
