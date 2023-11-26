@@ -1,14 +1,25 @@
 package com.bridgelabz;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBook {
-    Scanner sc = new Scanner(System.in);
+    private String addressBookName;
+    public static Scanner sc = new Scanner(System.in);
     Contact person = new Contact();
     List<Contact> contactList = new ArrayList<>();
+    public String getAddressBookName(){
+        return addressBookName;
+    }
+    public void setAddressBookName(String addressBookName){
+        this.addressBookName = addressBookName;
+    }
+    @Override
+    public String toString(){
+        return "AddressBook{" +
+                "addressBookName='" + addressBookName + '\'' +
+                ", contactArrayList=" + contactList +
+                '}';
+    }
     public void addContact(){
         System.out.println("Enter first name :");
         String firstName = sc.next();
@@ -120,22 +131,40 @@ public class AddressBook {
         }
         System.out.println(contactList);
     }
+    public void addMultipleAddressBook(){
+        Map<String, AddressBook> addressBookMap = new HashMap<>();
+        System.out.println("How many address books do you want to create?");
+        int numOfAddressBooks = sc.nextInt();
+        for (int i = 1; i <= numOfAddressBooks; i++){
+            System.out.println("Enter " + i + " address book name");
+            String addressBookName = sc.next();
+            AddressBook addressBook = new AddressBook();
+            addressBook.setAddressBookName(addressBookName);
+            addressBook.addMultipleContact();
+            addressBookMap.put(addressBookName, addressBook);
+        }
+    }
     public static void main(String[] args){
         System.out.println("Welcome to address book management system.");
         Scanner sc = new Scanner(System.in);
         AddressBook addressBook = new AddressBook();
-        System.out.println("Please enter the details of first contact.");
-        addressBook.addContact();
         boolean continueExecution = true;
         while (continueExecution)
         {
             System.out.println("Please select the option:- ");
-            System.out.println("1.Edit above contact\n2.Delete the contact\n3.Add multiple contacts");
+            System.out.println("""
+                    1.Add contact
+                    2.Edit above contact
+                    3.Delete the contact
+                    4.Add multiple contacts
+                    5.Add multiple address books""");
             int option = sc.nextInt();
             switch(option){
-                case 1 -> addressBook.editContact();
-                case 2 -> addressBook.deleteContact();
-                case 3 -> addressBook.addMultipleContact();
+                case 1 -> addressBook.addContact();
+                case 2 -> addressBook.editContact();
+                case 3 -> addressBook.deleteContact();
+                case 4 -> addressBook.addMultipleContact();
+                case 5 -> addressBook.addMultipleAddressBook();
                 default -> System.out.println("Please enter correct option.");
             }
             System.out.println("Do you want to continue.(yes/no)");
