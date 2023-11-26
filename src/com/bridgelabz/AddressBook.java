@@ -23,6 +23,11 @@ public class AddressBook {
     public void addContact(){
         System.out.println("Enter first name :");
         String firstName = sc.next();
+        boolean isDuplicates = contactList.stream().anyMatch(contact -> contact.getFirstName().equals(firstName));
+        if (isDuplicates) {
+            System.out.println("Contact already exists please enter another name");
+            return;
+        }
         person.setFirstName(firstName);
 
         System.out.println("Enter last name :");
