@@ -178,6 +178,17 @@ public class AddressBook {
         }
         return matchingContacts;
     }
+    public long getCountByCity(String cityName) {
+        return contactList.stream()
+                .filter(contact -> contact.getCity().equalsIgnoreCase(cityName))
+                .count();
+    }
+
+    public long getCountByState(String stateName) {
+        return contactList.stream()
+                .filter(contact -> contact.getState().equalsIgnoreCase(stateName))
+                .count();
+    }
     public static void main(String[] args){
         System.out.println("Welcome to address book management system.");
         Scanner sc = new Scanner(System.in);
@@ -192,7 +203,10 @@ public class AddressBook {
                     3.Delete the contact
                     4.Add multiple contacts
                     5.Add multiple address books
-                    6.Search person by city""");
+                    6.Search person by city
+                    7.Search person by state
+                    8.Count by city name
+                    9.Count by state name""");
 
             int option = sc.nextInt();
             switch(option){
@@ -228,6 +242,21 @@ public class AddressBook {
                     } else {
                         System.out.println("No contacts found in " + stateName);
                     }
+                }
+                case 8 -> {
+                    System.out.println("Enter city name:");
+                    String cityNames = sc.next();
+                    long countByCity = addressBook.getCountByCity(cityNames);
+
+                    System.out.println("Number of contacts in " + cityNames + ": " + countByCity);
+                }
+
+                case 9 -> {
+                    System.out.println("Enter state name:");
+                    String stateName = sc.next();
+                    long countByState = addressBook.getCountByState(stateName);
+
+                    System.out.println("Number of contacts in " + stateName + ": " + countByState);
                 }
                 default -> System.out.println("Please enter correct option.");
             }
