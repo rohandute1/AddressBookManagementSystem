@@ -189,6 +189,11 @@ public class AddressBook {
                 .filter(contact -> contact.getState().equalsIgnoreCase(stateName))
                 .count();
     }
+    public void sortByPersonName() {
+        Collections.sort(contactList, Comparator.comparing(Contact::getFirstName));
+        System.out.println("Address book sorted by person's name:");
+        System.out.println(contactList);
+    }
     public static void main(String[] args){
         System.out.println("Welcome to address book management system.");
         Scanner sc = new Scanner(System.in);
@@ -206,7 +211,8 @@ public class AddressBook {
                     6.Search person by city
                     7.Search person by state
                     8.Count by city name
-                    9.Count by state name""");
+                    9.Count by state name
+                    10.Sort contact by first name""");
 
             int option = sc.nextInt();
             switch(option){
@@ -258,6 +264,8 @@ public class AddressBook {
 
                     System.out.println("Number of contacts in " + stateName + ": " + countByState);
                 }
+                case 10 -> addressBook.sortByPersonName();
+
                 default -> System.out.println("Please enter correct option.");
             }
             System.out.println("Do you want to continue.(yes/no)");
