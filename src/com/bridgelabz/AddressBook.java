@@ -26,7 +26,7 @@ public class AddressBook {
         Contact person = new Contact();
         System.out.println("Enter first name :");
         String firstName = sc.next();
-        boolean isDuplicates = contactList.stream().anyMatch(contact -> contact.getFirstName().equals(firstName));   // To check for duplicate enteries
+        boolean isDuplicates = contactList.stream().anyMatch(contact -> contact.getFirstName().equals(firstName));   // To check for duplicate entries
         if (isDuplicates) {
             System.out.println("Contact already exists please enter another name");
             return;
@@ -69,7 +69,7 @@ public class AddressBook {
         System.out.println("Please enter the Name of which you want to edit :");
         String name = sc.next();
         for (int i = 0;i<contactList.size();i++) {
-            if (name.equals(person.getFirstName())) {
+            if (name.equals(contactList.get(i).getFirstName())) {
                 System.out.println("Select option from below:");
                 System.out.println("""
                         1.Change first name.
